@@ -77,4 +77,19 @@ class win_screen_resolution (
     require => Registry_key[$win_screen_resolution::params::registry_path],
   }
 
+  registry_value { 'Set logon ExecTime':
+    ensure  => 'present',
+    path    => "${win_screen_resolution::params::registry_path}\ExecTime",
+    data    => '',
+    type    => 'qword',
+    require => Registry_key[$win_screen_resolution::params::registry_path],
+  }
+
+  registry::value { 'Set default value':
+    key     => $win_screen_resolution::params::registry_path,
+    value   => '(default)',
+    data    => '',
+    require => Registry_key[$win_screen_resolution::params::registry_path],
+  }
+
 }

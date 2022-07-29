@@ -13,8 +13,9 @@
 
 ### <a name="win_screen_resolution"></a>`win_screen_resolution`
 
-Check the current screen resolution using a fact and set the new
-resolution if not yet present.
+The current screen resolution is szored as a fact.
+To set the new scren resolution a gpo logon script will be created
+and added to the registry.
 
  }
 
@@ -84,5 +85,5 @@ The following parameters are available in the `win_screen_resolution::params` cl
 
 Data type: `Array`
 
-
+The valid screen resources
 

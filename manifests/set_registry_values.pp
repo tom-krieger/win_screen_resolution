@@ -119,7 +119,6 @@ define win_screen_resolution::set_registry_values (
     path    => "${registry_path}\0\0\Script",
     data    => "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}",
     type    => 'string',
-    require => Registry_key["${registry_path}\0\0"],
   }
 
   registry_value { "${area}-Set logon params":
@@ -148,7 +147,7 @@ define win_screen_resolution::set_registry_values (
     }
   }
 
-  registry::value { "${area}-Set default value fot \0\0":
+  registry::value { "${area}-Set default value for \0\0":
     key     => "${registry_path}\0\0",
     value   => '(default)',
     data    => '',

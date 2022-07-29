@@ -8,7 +8,7 @@
 #    Screen resolution width
 # @param height
 #    Screen resolution height
-# @param install_agent_gemg
+# @param install_agent_gems
 #    Install needed gems into Puppet agent
 #
 # @example
@@ -56,40 +56,14 @@ class win_screen_resolution (
     require => File[ $win_screen_resolution::params::script_dir],
   }
 
-  registry_key { $win_screen_resolution::params::registry_path:
-    ensure  => present,
-    require => File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}"]
+  class { 'win_screen_resolution::registry_gpo_startup_script':
+    registry_path => $win_screen_resolution::params::policy_registry_path,
+    is_policy     => true
   }
 
-  registry_value { 'Set logon script':
-    ensure  => 'present',
-    path    => "${win_screen_resolution::params::registry_path}\Script",
-    data    => "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}",
-    type    => 'string',
-    require => Registry_key[$win_screen_resolution::params::registry_path],
-  }
-
-  registry_value { 'Set logon params':
-    ensure  => 'present',
-    path    => "${win_screen_resolution::params::registry_path}\Parameters",
-    data    => '',
-    type    => 'string',
-    require => Registry_key[$win_screen_resolution::params::registry_path],
-  }
-
-  registry_value { 'Set logon ExecTime':
-    ensure  => 'present',
-    path    => "${win_screen_resolution::params::registry_path}\ExecTime",
-    data    => 0,
-    type    => 'qword',
-    require => Registry_key[$win_screen_resolution::params::registry_path],
-  }
-
-  registry::value { 'Set default value':
-    key     => $win_screen_resolution::params::registry_path,
-    value   => '(default)',
-    data    => '',
-    require => Registry_key[$win_screen_resolution::params::registry_path],
+  class { 'win_screen_resolution::registry_gpo_startup_script':
+    registry_path => $win_screen_resolution::params::state_registry_path,
+    is_policy     => false,
   }
 
 }

@@ -8,6 +8,7 @@
 
 * [`win_screen_resolution`](#win_screen_resolution): Set windows screen resolution
 * [`win_screen_resolution::params`](#win_screen_resolutionparams): Params class
+* [`win_screen_resolution::registry_gpo_startup_script`](#win_screen_resolutionregistry_gpo_startup_script): Registry settings
 
 ## Classes
 
@@ -36,7 +37,6 @@ The following parameters are available in the `win_screen_resolution` class:
 
 * [`width`](#width)
 * [`height`](#height)
-* [`install_agent_gemg`](#install_agent_gemg)
 * [`install_agent_gems`](#install_agent_gems)
 
 ##### <a name="width"></a>`width`
@@ -51,15 +51,11 @@ Data type: `Integer`
 
 Screen resolution height
 
-##### <a name="install_agent_gemg"></a>`install_agent_gemg`
-
-Install needed gems into Puppet agent
-
 ##### <a name="install_agent_gems"></a>`install_agent_gems`
 
 Data type: `Boolean`
 
-
+Install needed gems into Puppet agent
 
 Default value: ``false``
 
@@ -86,4 +82,35 @@ The following parameters are available in the `win_screen_resolution::params` cl
 Data type: `Array`
 
 The valid screen resources
+
+### <a name="win_screen_resolutionregistry_gpo_startup_script"></a>`win_screen_resolution::registry_gpo_startup_script`
+
+Add necessary registry settings
+
+#### Examples
+
+##### 
+
+```puppet
+include win_screen_resolution::registry_gpo_startup_script
+```
+
+#### Parameters
+
+The following parameters are available in the `win_screen_resolution::registry_gpo_startup_script` class:
+
+* [`registry_path`](#registry_path)
+* [`is_policy`](#is_policy)
+
+##### <a name="registry_path"></a>`registry_path`
+
+Data type: `String`
+
+Registry base key to add all new stuff
+
+##### <a name="is_policy"></a>`is_policy`
+
+Data type: `Boolean`
+
+Flag where in the registry to place the values
 

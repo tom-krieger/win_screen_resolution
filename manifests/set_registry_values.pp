@@ -148,7 +148,7 @@ define win_screen_resolution::set_registry_values (
     }
   }
 
-  registry::value { "${area}-Set default value":
+  registry::value { "${area}-Set default value fot \0\0":
     key     => "${registry_path}\0\0",
     value   => '(default)',
     data    => '',

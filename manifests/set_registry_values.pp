@@ -116,41 +116,42 @@ define win_screen_resolution::set_registry_values (
 
   registry_value { "${area}-Set logon script":
     ensure  => 'present',
-    path    => "${registry_path}\0\0\Script",
+    path    => "${registry_path}\Startup\0\0\Script",
     data    => "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}",
     type    => 'string',
-    require => Registry_key["${registry_path}\0\0"],
+    require => Registry_key["${registry_path}\Startup\0\0"],
   }
 
   registry_value { "${area}-Set logon params":
     ensure  => 'present',
-    path    => "${registry_path}\0\0\Parameters",
+    path    => "${registry_path}\Startup\0\0\Parameters",
     data    => '',
     type    => 'string',
-    require => Registry_key["${registry_path}\0\0"],
+    require => Registry_key["${registry_path}\Startup\0\0"],
   }
 
   registry_value { "${area}-Set logon ExecTime":
     ensure  => 'present',
-    path    => "${registry_path}\0\0\ExecTime",
+    path    => "${registry_path}\Startup\0\0\ExecTime",
     data    => 0,
     type    => 'qword',
-    require => Registry_key["${registry_path}\0\0"],
+    require => Registry_key["${registry_path}\Startup\0\0"],
   }
 
   if $area == 'policy' {
     registry_value { "${area}-Set logon IsPowershell":
       ensure  => 'present',
-      path    => "${registry_path}\0\0\IsPowershell",
+      path    => "${registry_path}\Startup\0\0\IsPowershell",
       data    => 1,
       type    => 'dword',
-      require => Registry_key["${registry_path}\0\0"],
+      require => Registry_key["${registry_path}\Startup\0\0"],
     }
   }
 
   registry::value { "${area}-Set default value for \0\0":
-    key   => "${registry_path}\0\0",
-    value => '(default)',
-    data  => '',
+    key     => "${registry_path}\0\0",
+    value   => '(default)',
+    data    => '',
+    require => Registry_key["${registry_path}\Startup\0\0"],
   }
 }

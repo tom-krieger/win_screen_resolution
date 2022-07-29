@@ -1,7 +1,8 @@
 # @summary Set windows screen resolution
 #
-# Check the current screen resolution using a fact and set the new
-# resolution if not yet present.
+# The current screen resolution is szored as a fact.
+# To set the new scren resolution a gpo logon script will be created
+# and added to the registry.
 #
 # @param width
 #    Screen resolution width
@@ -38,31 +39,29 @@ class win_screen_resolution (
     fail("Screen resolution ${vgl} is invalid.")
   }
 
-  if has_key($facts, 'win_screen_resolution') {
-
-    if  $facts['win_screen_resolution']['width'] != $width or
-        $facts['win_screen_resolution']['height'] != $height
-    {
-      echo { 'Set resolution':
-        message  => "Setting screen resolution to ${width} x ${height}",
-        loglevel => 'info',
-        withpath => false,
-      }
-
-      exec { 'rename-guest':
-        command   => "Set-DisplayResolution -Height ${height} -Width ${width} -Force",
-        provider  => powershell,
-        logoutput => true,
-      }
-    }
-
-  } else {
-
-    echo { 'Fact win_screen_resolution is missing':
-      message  => 'Fact win_screen_resolution is missing',
-      loglevel => 'warning',
-      withpath => false,
-    }
-
+  file { $win_screen_resolution::params::script_dir:
+    ensure => directory,
+    owner  => 'Administrator',
+    group  => 'Administrator',
   }
+
+  file { "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}":
+    ensure  => file,
+    content => epp('win_screen_resolution/set_screen_resolution.epp', {
+      width  => $width,
+      height => $height,
+    }),
+    owner   => 'Administrator',
+    group   => 'Administrator',
+    require => File[ $win_screen_resolution::params::script_dir],
+  }
+
+  registry_value { 'Set logon script':
+    ensure  => 'present',
+    path    => $win_screen_resolution::params::registry_key,
+    data    => "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}",
+    type    => 'string',
+    require => File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}"]
+  }
+
 }

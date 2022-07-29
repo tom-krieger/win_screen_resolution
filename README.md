@@ -20,11 +20,15 @@ The win_screen_resolution module helps you with a class to set the screen resolu
 Please keep in mind that this works not for remote desktop sessions.
 This module adds a fact `win_screen_resolution` for the current screen resolution.
 
+Screen resolution change will be done during user logon. Therefore a Powershell script is installed
+and configred in the Windows fregistry.
+
 ## Setup
 
 ### What win_screen_resolution affects
 
 This module changes the screen resolution of a windows system and stores this resolution permanently.
+The screen resolution will be rest after each logon.
 
 ### Setup Requirements
 

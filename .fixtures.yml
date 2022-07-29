@@ -17,3 +17,6 @@ fixtures:
     pwshlib:
       repo: "puppetlabs/pwshlib"
       ref: "0.10.2"
+    registry:
+      repo: "puppetlabs/registry"
+      ref: "4.1.0"

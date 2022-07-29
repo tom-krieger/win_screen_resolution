@@ -24,19 +24,29 @@ describe 'win_screen_resolution' do
       it {
         is_expected.to compile
 
-        is_expected.to contain_echo('Set resolution')
+        is_expected.to contain_file('C:\ProgramData\PuppetLabs\win_screen_resolution')
           .with(
-            'message'  => 'Setting screen resolution to 1600 x 1200',
-            'loglevel' => 'info',
-            'withpath' => false,
+            'ensure' => 'directory',
+            'owner'  => 'Administrator',
+            'group'  => 'Administrator',
           )
 
-        is_expected.to contain_exec('rename-guest')
+        is_expected.to contain_file('C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1')
           .with(
-            'command'   => 'Set-DisplayResolution -Height 1200 -Width 1600 -Force',
-            'provider'  => 'powershell',
-            'logoutput' => true,
+            'ensure'  => 'file',
+            'owner'   => 'Administrator',
+            'group'   => 'Administrator',
           )
+          .that_requires('File[C:\ProgramData\PuppetLabs\win_screen_resolution]')
+
+        is_expected.to contain_registry_value('Set logon script')
+          .with(
+            'path'     => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Group Policy\State\Machine\Scripts\Startup\0\0\Script',
+            'ensure'   => 'present',
+            'data'     => 'C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1',
+            'type'     => 'string',
+          )
+          .that_requires('File[C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1]')
       }
     end
 
@@ -60,25 +70,35 @@ describe 'win_screen_resolution' do
       it {
         is_expected.to compile
 
-        is_expected.to contain_echo('Set resolution')
-          .with(
-            'message'  => 'Setting screen resolution to 1600 x 1200',
-            'loglevel' => 'info',
-            'withpath' => false,
-          )
-
-        is_expected.to contain_exec('rename-guest')
-          .with(
-            'command'   => 'Set-DisplayResolution -Height 1200 -Width 1600 -Force',
-            'provider'  => 'powershell',
-            'logoutput' => true,
-          )
-
         is_expected.to contain_package('fiddle')
           .with(
             'ensure'   => 'present',
             'provider' => 'puppet_gem',
           )
+
+        is_expected.to contain_file('C:\ProgramData\PuppetLabs\win_screen_resolution')
+          .with(
+          'ensure' => 'directory',
+          'owner'  => 'Administrator',
+          'group'  => 'Administrator',
+        )
+
+        is_expected.to contain_file('C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1')
+          .with(
+            'ensure'  => 'file',
+            'owner'   => 'Administrator',
+            'group'   => 'Administrator',
+          )
+          .that_requires('File[C:\ProgramData\PuppetLabs\win_screen_resolution]')
+
+        is_expected.to contain_registry_value('Set logon script')
+          .with(
+            'path'     => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Group Policy\State\Machine\Scripts\Startup\0\0\Script',
+            'ensure'   => 'present',
+            'data'     => 'C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1',
+            'type'     => 'string',
+          )
+          .that_requires('File[C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1]')
       }
     end
 

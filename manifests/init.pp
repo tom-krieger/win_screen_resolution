@@ -56,12 +56,17 @@ class win_screen_resolution (
     require => File[ $win_screen_resolution::params::script_dir],
   }
 
+  registry_key { $win_screen_resolution::params::registry_key:
+    ensure  => present,
+    require => File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}"]
+  }
+
   registry_value { 'Set logon script':
     ensure  => 'present',
     path    => $win_screen_resolution::params::registry_key,
     data    => "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}",
     type    => 'string',
-    require => File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}"]
+    require => Registry_key[$win_screen_resolution::params::registry_key],
   }
 
 }

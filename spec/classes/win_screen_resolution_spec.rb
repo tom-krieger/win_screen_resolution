@@ -39,6 +39,12 @@ describe 'win_screen_resolution' do
           )
           .that_requires('File[C:\ProgramData\PuppetLabs\win_screen_resolution]')
 
+        is_expected.to contain_registry_key('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Group Policy\State\Machine\Scripts\Startup\0\0\Script')
+          .with(
+          'ensure' => 'present',
+        )
+          .that_requires('File[C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1]')
+
         is_expected.to contain_registry_value('Set logon script')
           .with(
             'path'     => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Group Policy\State\Machine\Scripts\Startup\0\0\Script',
@@ -46,7 +52,7 @@ describe 'win_screen_resolution' do
             'data'     => 'C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1',
             'type'     => 'string',
           )
-          .that_requires('File[C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1]')
+          .that_requires('Registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Group Policy\State\Machine\Scripts\Startup\0\0\Script]')
       }
     end
 
@@ -91,6 +97,12 @@ describe 'win_screen_resolution' do
           )
           .that_requires('File[C:\ProgramData\PuppetLabs\win_screen_resolution]')
 
+        is_expected.to contain_registry_key('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Group Policy\State\Machine\Scripts\Startup\0\0\Script')
+          .with(
+            'ensure' => 'present',
+          )
+          .that_requires('File[C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1]')
+
         is_expected.to contain_registry_value('Set logon script')
           .with(
             'path'     => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Group Policy\State\Machine\Scripts\Startup\0\0\Script',
@@ -98,7 +110,7 @@ describe 'win_screen_resolution' do
             'data'     => 'C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1',
             'type'     => 'string',
           )
-          .that_requires('File[C:\ProgramData\PuppetLabs\win_screen_resolution\set_screen_resolution.ps1]')
+          .that_requires('Registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Group Policy\State\Machine\Scripts\Startup\0\0\Script]')
       }
     end
 

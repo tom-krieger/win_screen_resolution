@@ -1,6 +1,9 @@
 # @summary Params class
 #
-#Param definitions.
+# Param definitions.
+#
+# @param valid_screen_resolutions
+#    The valid screen resources
 #
 # @example
 #   include win_screen_resolution::params

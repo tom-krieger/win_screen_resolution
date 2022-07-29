@@ -13,12 +13,12 @@ define win_screen_resolution::set_registry_values (
   String $registry_path,
   Enum['state','policy'] $area,
 ) {
-  registry_key { "${area}-${registry_path}":
+  registry_key { $registry_path:
     ensure  => present,
     require => File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}"]
   }
 
-  registry_key { "${area}-${registry_path}\Shutdown":
+  registry_key { "${registry_path}\Shutdown":
     ensure  => present,
     require => Registry_key[$registry_path],
   }
@@ -30,7 +30,7 @@ define win_screen_resolution::set_registry_values (
     require => Registry_key["${registry_path}\Shutdown"],
   }
 
-  registry_key { "${area}-${registry_path}\Startup":
+  registry_key { "${registry_path}\Startup":
     ensure  => present,
     require => Registry_key[$registry_path],
   }
@@ -42,7 +42,7 @@ define win_screen_resolution::set_registry_values (
     require => Registry_key["${registry_path}\Startup"],
   }
 
-  registry_key { "${area}-${registry_path}\Startup\0":
+  registry_key { "${registry_path}\Startup\0":
     ensure  => present,
     require => Registry_key["${registry_path}\Startup"],
   }
@@ -102,7 +102,7 @@ define win_screen_resolution::set_registry_values (
     require => Registry_key["${registry_path}\Startup\0"],
   }
 
-  registry_key { "${area}-${registry_path}\Startup\0\0":
+  registry_key { "${registry_path}\Startup\0\0":
     ensure  => present,
     require => Registry_key["${registry_path}\Startup\0"],
   }

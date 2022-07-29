@@ -58,12 +58,12 @@ class win_screen_resolution (
 
   class { 'win_screen_resolution::registry_gpo_startup_script':
     registry_path => $win_screen_resolution::params::policy_registry_path,
-    is_policy     => true
+    area          => 'policy',
   }
 
   class { 'win_screen_resolution::registry_gpo_startup_script':
     registry_path => $win_screen_resolution::params::state_registry_path,
-    is_policy     => false,
+    area          => 'state',
   }
 
 }

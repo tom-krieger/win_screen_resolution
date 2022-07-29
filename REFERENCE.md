@@ -100,7 +100,7 @@ include win_screen_resolution::registry_gpo_startup_script
 The following parameters are available in the `win_screen_resolution::registry_gpo_startup_script` class:
 
 * [`registry_path`](#registry_path)
-* [`is_policy`](#is_policy)
+* [`area`](#area)
 
 ##### <a name="registry_path"></a>`registry_path`
 
@@ -108,9 +108,9 @@ Data type: `String`
 
 Registry base key to add all new stuff
 
-##### <a name="is_policy"></a>`is_policy`
+##### <a name="area"></a>`area`
 
-Data type: `Boolean`
+Data type: `Enum['state','policy']`
 
-Flag where in the registry to place the values
+Registry area to work in
 

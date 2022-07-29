@@ -1,0 +1,22 @@
+---
+Gemfile:
+  optional:
+    ':system_tests':
+      - gem: 'serverspec'
+      - gem: 'hiera-puppet-helper'
+    ':development':
+      - gem: 'puppet-strings'
+
+spec/spec_helper.rb:
+  mock_with: ':rspec'
+  spec_overrides:
+    - 'RSpec.configure do |c|'
+    - "  c.after(:suite) do"
+    - "    RSpec::Puppet::Coverage.report!(80)"
+    - "  end"
+    - "end"
+appveyor.yml:
+  delete: true
+
+.gitlab-ci.yml:
+  delete: true

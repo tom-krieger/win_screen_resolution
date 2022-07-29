@@ -1,0 +1,45 @@
+{
+  "name": "tomkrieger-win_screen_resolution",
+  "version": "0.1.0",
+  "author": "Thomas Krieger",
+  "summary": "Set screen resolution on windows systems",
+  "license": "Apache-2.0",
+  "source": "https://git.home.tom-krieger.de/puppet-modules/win_screen_resolution.git",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 4.0.0 < 9.0.0"
+    },
+    {
+      "name": "ipcrm-echo",
+      "version_requirement": ">= 0.1.7 < 1.0.0"
+    },
+    {
+      "name": "puppetlabs-powershell",
+      "version_requirement": ">= 5.1.0 < 6.0.0"
+    },
+    {
+      "name": "puppetlabs-pwshlib",
+      "version_requirement": ">= 0.10.2 < 0.20.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "windows",
+      "operatingsystemrelease": [
+        "2016",
+        "2019",
+        "10"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 6.0.0 < 8.0.0"
+    }
+  ],
+  "pdk-version": "2.4.0",
+  "template-url": "pdk-default#2.4.0",
+  "template-ref": "tags/2.4.0-0-gfa6b6d2"
+}

@@ -107,7 +107,7 @@ define win_screen_resolution::set_registry_values (
     require => Registry_key["${registry_path}\Startup\0"],
   }
 
-  registry::value { 'Set default value for Startup\0':
+  registry::value { "${area}-Set default value for Startup\0\0":
     key     => "${registry_path}\Startup\0\0",
     value   => '(default)',
     data    => '',

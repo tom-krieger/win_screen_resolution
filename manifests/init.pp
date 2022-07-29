@@ -56,12 +56,12 @@ class win_screen_resolution (
     require => File[ $win_screen_resolution::params::script_dir],
   }
 
-  class { 'win_screen_resolution::registry_gpo_startup_script':
+  win_screen_resolution::set_registry_values { 'policy':
     registry_path => $win_screen_resolution::params::policy_registry_path,
     area          => 'policy',
   }
 
-  class { 'win_screen_resolution::registry_gpo_startup_script':
+  win_screen_resolution::set_registry_values { 'state':
     registry_path => $win_screen_resolution::params::state_registry_path,
     area          => 'state',
   }

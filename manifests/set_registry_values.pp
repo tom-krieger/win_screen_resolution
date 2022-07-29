@@ -8,8 +8,8 @@
 #   Registry area to work in
 #
 # @example
-#   include win_screen_resolution::registry_gpo_startup_script
-class win_screen_resolution::registry_gpo_startup_script (
+#   win_screen_resolution::set_registry_values { 'namevar': }
+define win_screen_resolution::set_registry_values (
   String $registry_path,
   Enum['state','policy'] $area,
 ) {

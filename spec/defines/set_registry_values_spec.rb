@@ -2,7 +2,12 @@
 
 require 'spec_helper'
 
-describe 'win_screen_resolution::registry_gpo_startup_script' do
+describe 'win_screen_resolution::set_registry_values' do
+  let(:title) { 'namevar' }
+  let(:params) do
+    {}
+  end
+
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }

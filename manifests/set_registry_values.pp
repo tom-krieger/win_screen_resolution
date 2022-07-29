@@ -88,7 +88,7 @@ define win_screen_resolution::set_registry_values (
 
   registry_value { "${area}-Set Startup\0 som-id":
     ensure  => present,
-    path    => ["${registry_path}\Startup\0\SOM-ID",
+    path    => "${registry_path}\Startup\0\SOM-ID",
     data    => 'Local',
     type    => 'string',
     require => Registry_key["${registry_path}\Startup\0"],

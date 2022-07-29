@@ -56,7 +56,7 @@ define win_screen_resolution::set_registry_values (
 
   registry_value { "${area}-Set Startup\0 displayname":
     ensure  => present,
-    path    =>Registry_key["${registry_path}\Startup\0\DisplayName"],
+    path    => "${registry_path}\Startup\0\DisplayName",
     data    => 'Local Group Policy',
     type    => 'string',
     require => Registry_key["${registry_path}\Startup\0"],
@@ -64,7 +64,7 @@ define win_screen_resolution::set_registry_values (
 
   registry_value { "${area}-Set Startup\0 filesyspath":
     ensure  => present,
-    path    =>Registry_key["${registry_path}\Startup\0\FileSysPath"],
+    path    => "${registry_path}\Startup\0\FileSysPath",
     data    => 'C:\Windows\System32\GroupPolicy\Machine',
     type    => 'string',
     require => Registry_key["${registry_path}\Startup\0"],
@@ -72,7 +72,7 @@ define win_screen_resolution::set_registry_values (
 
   registry_value { "${area}-Set Startup\0 gpo-id":
     ensure  => present,
-    path    =>Registry_key["${registry_path}\Startup\0\GPO-ID"],
+    path    => "${registry_path}\Startup\0\GPO-ID",
     data    => 'LocalGPO',
     type    => 'string',
     require => Registry_key["${registry_path}\Startup\0"],
@@ -80,7 +80,7 @@ define win_screen_resolution::set_registry_values (
 
   registry_value { "${area}-Set Startup\0 gponame":
     ensure  => present,
-    path    =>Registry_key["${registry_path}\Startup\0\GPOName"],
+    path    => "${registry_path}\Startup\0\GPOName",
     data    => 'Local Group Policy',
     type    => 'string',
     require => Registry_key["${registry_path}\Startup\0"],
@@ -88,7 +88,7 @@ define win_screen_resolution::set_registry_values (
 
   registry_value { "${area}-Set Startup\0 som-id":
     ensure  => present,
-    path    =>Registry_key["${registry_path}\Startup\0\SOM-ID"],
+    path    => ["${registry_path}\Startup\0\SOM-ID",
     data    => 'Local',
     type    => 'string',
     require => Registry_key["${registry_path}\Startup\0"],
@@ -96,7 +96,7 @@ define win_screen_resolution::set_registry_values (
 
   registry_value { "${area}-Set Startup\0 psscriptorder":
     ensure  => present,
-    path    =>Registry_key["${registry_path}\Startup\0\PSScriptOrder"],
+    path    => "${registry_path}\Startup\0\PSScriptOrder",
     data    => 1,
     type    => 'dword',
     require => Registry_key["${registry_path}\Startup\0"],

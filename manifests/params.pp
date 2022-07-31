@@ -13,7 +13,7 @@ class win_screen_resolution::params (
   $gems                 = ['fiddle']
   #$script_dir           = 'C:\ProgramData\PuppetLabs\win_screen_resolution'
 
-  if $facts['operatingsyetem'].downcase() == 'windows' {
+  if $facts['operatingsystem'].downcase() == 'windows' {
 
     $script_dir = $facts['operatingsystemmajrelease'] ? {
       '2019'  => 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp',

@@ -56,14 +56,14 @@ class win_screen_resolution (
     require => File[ $win_screen_resolution::params::script_dir],
   }
 
-  win_screen_resolution::set_registry_values { 'policy':
-    registry_path => $win_screen_resolution::params::policy_registry_path,
-    area          => 'policy',
-  }
+  # win_screen_resolution::set_registry_values { 'policy':
+  #   registry_path => $win_screen_resolution::params::policy_registry_path,
+  #   area          => 'policy',
+  # }
 
-  win_screen_resolution::set_registry_values { 'state':
-    registry_path => $win_screen_resolution::params::state_registry_path,
-    area          => 'state',
-  }
+  # win_screen_resolution::set_registry_values { 'state':
+  #   registry_path => $win_screen_resolution::params::state_registry_path,
+  #   area          => 'state',
+  # }
 
 }

@@ -34,6 +34,12 @@ class win_screen_resolution (
     }
   }
 
+  package { ' grouppolicy ':
+    ensure   => present,
+    source   => 'PSGallery',
+    provider => 'powershellcore',
+  }
+
   $vgl = "${width} x ${height}"
   if ! ($vgl in $win_screen_resolution::params::valid_screen_resolutions) {
     fail("Screen resolution ${vgl} is invalid.")

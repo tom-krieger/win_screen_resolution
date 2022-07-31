@@ -37,7 +37,7 @@ class win_screen_resolution (
   package { ' grouppolicy ':
     ensure   => present,
     source   => 'PSGallery',
-    provider => 'powershellcore',
+    provider => 'windowspowershell',
   }
 
   $vgl = "${width} x ${height}"

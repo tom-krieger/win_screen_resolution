@@ -34,9 +34,9 @@ class win_screen_resolution (
     }
   }
 
-  package { ' grouppolicy ':
-    source   => 'PSGallery',
-    provider => 'windowspowershell',
+  windowsfeature { 'GPMC':
+    ensure                 => present,
+    installmanagementtools => true,
   }
 
   $vgl = "${width} x ${height}"

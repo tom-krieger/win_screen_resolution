@@ -69,13 +69,21 @@ class win_screen_resolution (
     notify  => Exec['add registry entries'],
   }
 
+  file { $win_screen_resolution::params::psscriptsinit:
+    ensure => file,
+    mode   => '0644',
+  }
+
   ini_setting { 'set logon script':
     ensure  => present,
     path    => $win_screen_resolution::params::psscriptsinit,
     section => 'Logon',
     setting => "${win_screen_resolution::params::child}CmdLine",
     value   => "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}",
-    require => File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}"],
+    require => [
+      File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}"],
+      File[$win_screen_resolution::params::psscriptsinit],
+    ],
   }
 
   ini_setting { 'set logon parameters':

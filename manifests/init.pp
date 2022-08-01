@@ -99,7 +99,7 @@ class win_screen_resolution (
   # }
 
   exec { 'add registry entries':
-    command     => "reg.exe import ${win_screen_resolution::params::script_dir}\\${registry_file}",
+    command     => "reg.exe import ${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::registry_file}",
     path        => ['C:\Windows\system32;C:\Windows','C:\Windows\System32\Wbem','C:\Windows\System32\WindowsPowerShell\v1.0',
                     'C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps'],
     refreshonly => true,

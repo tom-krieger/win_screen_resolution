@@ -65,12 +65,14 @@ class win_screen_resolution (
       script      => "${win_screen_resolution::params::gpo_script_dir}\\\\${win_screen_resolution::params::script_file}",
     }),
     owner   => 'Administrator',
-    group   => 'Administrator',
+    group   => 'Administrators',
     notify  => Exec['add registry entries'],
   }
 
   file { $win_screen_resolution::params::psscriptsinit:
     ensure => file,
+    owner  => 'Administrator',
+    group  => 'Administrators',
     mode   => '0644',
   }
 

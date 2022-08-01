@@ -1,0 +1,19 @@
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Group Policy\Scripts]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Group Policy\Scripts\Logoff]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Group Policy\Scripts\Logon]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Group Policy\Scripts\Logon\<%= $parent %>]
+"GPO-ID"="LocalGPO"
+"SOM-ID"="Local"
+"FileSysPath"="<%= $filesyspath %>"
+"DisplayName"="Local Group Policy"
+"GPOName"="Local Group Policy"
+"PSScriptOrder"=dword:00000001
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Group Policy\Scripts\Logon\<%= $parent %>\<%= $child %>]
+"Script"="<%= $script %>"
+"Parameters"=""
+"IsPowershell"=dword:00000001
+"ExecTime"=hex(b):00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00

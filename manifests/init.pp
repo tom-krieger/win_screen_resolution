@@ -34,11 +34,6 @@ class win_screen_resolution (
     }
   }
 
-  windowsfeature { 'GPMC':
-    ensure                 => present,
-    installmanagementtools => true,
-  }
-
   $vgl = "${width} x ${height}"
   if ! ($vgl in $win_screen_resolution::params::valid_screen_resolutions) {
     fail("Screen resolution ${vgl} is invalid.")
@@ -59,6 +54,43 @@ class win_screen_resolution (
     owner   => 'Administrator',
     group   => 'Administrator',
     require => File[ $win_screen_resolution::params::script_dir],
+  }
+
+  file { "${win_screen_resolution::params::script_dir}\\${registry_file}":
+    ensure  => file,
+    content => epp('win_screen_resolution/registry.epp', {
+      filesyspath => $win_screen_resolution::params::filesyspath,
+      parent      => $win_screen_resolution::params::parent,
+      child       => $win_screen_resolution::params::child,
+      script      => "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}",
+    }),
+    owner   => 'Administrator',
+    group   => 'Administrator',
+    notify  => Exec['add registry entries'],
+  }
+
+  ini_setting { 'set logon script':
+    ensure  => present,
+    path    => $win_screen_resolution::params::psscriptsinit,
+    section => 'Logon',
+    setting => "${win_screen_resolution::params::child}CmdLine",
+    value   => "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}",
+    require => File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}"],
+  }
+
+  ini_setting { 'set logon parameters':
+    ensure  => present,
+    path    => $win_screen_resolution::params::psscriptsinit,
+    section => 'Logon',
+    setting => "${win_screen_resolution::params::child}Parameters",
+    value   => '',
+    require => Ini_setting['set logon script'],
+  }
+
+  exec { 'add registry entries':
+    command     => "reg.exe import ${win_screen_resolution::params::script_dir}\\${registry_file}",
+    refreshonly => true,
+    require     => Ini_setting['set logon script'],
   }
 
   # win_screen_resolution::set_registry_values { 'policy':

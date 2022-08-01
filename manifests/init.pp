@@ -85,6 +85,7 @@ class win_screen_resolution (
     require => [
       File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}"],
       File[$win_screen_resolution::params::psscriptsinit],
+      File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::registry_file}"],
     ],
   }
 
@@ -102,7 +103,6 @@ class win_screen_resolution (
     path        => ['C:\Windows\system32;C:\Windows','C:\Windows\System32\Wbem','C:\Windows\System32\WindowsPowerShell\v1.0',
                     'C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps'],
     refreshonly => true,
-    require     => Ini_setting['set logon script'],
   }
 
   # win_screen_resolution::set_registry_values { 'policy':

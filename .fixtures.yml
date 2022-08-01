@@ -20,3 +20,6 @@ fixtures:
     registry:
       repo: "puppetlabs/registry"
       ref: "4.1.0"
+    local_group_policy:
+      repo: "cannonps/local_group_policy"
+      ref: "1.1.0"

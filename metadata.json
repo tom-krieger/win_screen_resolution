@@ -25,6 +25,10 @@
     {
       "name": "puppetlabs-registry",
       "version_requirement": ">= 4.1.0 < 5.0.0"
+    },
+    {
+      "name": "cannonps-local_group_policy",
+      "version_requirement": ">= 1.1.0 < 2.0.0"
     }
   ],
   "operatingsystem_support": [

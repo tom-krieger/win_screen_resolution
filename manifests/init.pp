@@ -76,27 +76,27 @@ class win_screen_resolution (
     mode   => '0644',
   }
 
-  ini_setting { 'set logon script':
-    ensure  => present,
-    path    => $win_screen_resolution::params::psscriptsinit,
-    section => 'Logon',
-    setting => "${win_screen_resolution::params::child}CmdLine",
-    value   => "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}",
-    require => [
-      File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}"],
-      File[$win_screen_resolution::params::psscriptsinit],
-      File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::registry_file}"],
-    ],
-  }
+  # ini_setting { 'set logon script':
+  #   ensure  => present,
+  #   path    => $win_screen_resolution::params::psscriptsinit,
+  #   section => 'Logon',
+  #   setting => "${win_screen_resolution::params::child}CmdLine",
+  #   value   => "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}",
+  #   require => [
+  #     File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}"],
+  #     File[$win_screen_resolution::params::psscriptsinit],
+  #     File["${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::registry_file}"],
+  #   ],
+  # }
 
-  ini_setting { 'set logon parameters':
-    ensure  => present,
-    path    => $win_screen_resolution::params::psscriptsinit,
-    section => 'Logon',
-    setting => "${win_screen_resolution::params::child}Parameters",
-    value   => '',
-    require => Ini_setting['set logon script'],
-  }
+  # ini_setting { 'set logon parameters':
+  #   ensure  => present,
+  #   path    => $win_screen_resolution::params::psscriptsinit,
+  #   section => 'Logon',
+  #   setting => "${win_screen_resolution::params::child}Parameters",
+  #   value   => '',
+  #   require => Ini_setting['set logon script'],
+  # }
 
   exec { 'add registry entries':
     command     => "reg.exe import ${win_screen_resolution::params::script_dir}\\${registry_file}",

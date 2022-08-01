@@ -8,7 +8,6 @@
 
 * [`win_screen_resolution`](#win_screen_resolution): Set windows screen resolution
 * [`win_screen_resolution::params`](#win_screen_resolutionparams): Params class
-* [`win_screen_resolution::registry_gpo_startup_script`](#win_screen_resolutionregistry_gpo_startup_script): Registry settings
 
 ### Defined types
 
@@ -86,37 +85,6 @@ The following parameters are available in the `win_screen_resolution::params` cl
 Data type: `Array`
 
 The valid screen resources
-
-### <a name="win_screen_resolutionregistry_gpo_startup_script"></a>`win_screen_resolution::registry_gpo_startup_script`
-
-Add necessary registry settings
-
-#### Examples
-
-##### 
-
-```puppet
-include win_screen_resolution::registry_gpo_startup_script
-```
-
-#### Parameters
-
-The following parameters are available in the `win_screen_resolution::registry_gpo_startup_script` class:
-
-* [`registry_path`](#registry_path)
-* [`area`](#area)
-
-##### <a name="registry_path"></a>`registry_path`
-
-Data type: `String`
-
-Registry base key to add all new stuff
-
-##### <a name="area"></a>`area`
-
-Data type: `Enum['state','policy']`
-
-Registry area to work in
 
 ## Defined types
 

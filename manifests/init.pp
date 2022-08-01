@@ -56,7 +56,7 @@ class win_screen_resolution (
     require => File[ $win_screen_resolution::params::script_dir],
   }
 
-  file { "${win_screen_resolution::params::script_dir}\\${registry_file}":
+  file { "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::registry_file}":
     ensure  => file,
     content => epp('win_screen_resolution/registry.epp', {
       filesyspath => $win_screen_resolution::params::filesyspath,

@@ -89,6 +89,8 @@ class win_screen_resolution (
 
   exec { 'add registry entries':
     command     => "reg.exe import ${win_screen_resolution::params::script_dir}\\${registry_file}",
+    path        => ['C:\Windows\system32;C:\Windows','C:\Windows\System32\Wbem','C:\Windows\System32\WindowsPowerShell\v1.0',
+                    'C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps'],
     refreshonly => true,
     require     => Ini_setting['set logon script'],
   }

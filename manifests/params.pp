@@ -12,6 +12,7 @@ class win_screen_resolution::params (
 ) {
   $gems                   = ['fiddle']
   $script_dir             = 'C:\ProgramData\PuppetLabs\win_screen_resolution'
+  $gpo_script_dir         = 'C:\\ProgramData\\PuppetLabs\\win_screen_resolution'
   $script_file            = 'set_screen_resolution.ps1'
   $registry_file          = 'reg_entries.reg'
   $filesyspath            = 'C:\\Windows\\System32\\GroupPolicy\\User'

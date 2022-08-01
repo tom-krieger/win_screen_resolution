@@ -62,7 +62,7 @@ class win_screen_resolution (
       filesyspath => $win_screen_resolution::params::filesyspath,
       parent      => $win_screen_resolution::params::parent,
       child       => $win_screen_resolution::params::child,
-      script      => "${win_screen_resolution::params::script_dir}\\${win_screen_resolution::params::script_file}",
+      script      => "${win_screen_resolution::params::gpo_script_dir}\\\\${win_screen_resolution::params::script_file}",
     }),
     owner   => 'Administrator',
     group   => 'Administrator',

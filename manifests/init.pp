@@ -76,6 +76,13 @@ class win_screen_resolution (
     mode   => '0644',
   }
 
+  local_group_policy { 'Run these programs at user logon':
+    ensure          => 'present',
+    policy_settings => {
+      'Items to run at logon' => ["${win_screen_resolution::params::gpo_script_dir}\\\\${win_screen_resolution::params::script_file}"]
+    }
+  }
+
   # ini_setting { 'set logon script':
   #   ensure  => present,
   #   path    => $win_screen_resolution::params::psscriptsinit,

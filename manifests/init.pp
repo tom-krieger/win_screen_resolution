@@ -79,7 +79,7 @@ class win_screen_resolution (
   local_group_policy { 'Run these programs at user logon':
     ensure          => 'present',
     policy_settings => {
-      'Items to run at logon' => ["${win_screen_resolution::params::gpo_script_dir}\\\\${win_screen_resolution::params::script_file}"]
+      'Items to run at logon' => "${win_screen_resolution::params::gpo_script_dir}\\\\${win_screen_resolution::params::script_file}"
     }
   }
 
